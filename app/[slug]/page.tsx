@@ -38,7 +38,7 @@ async function getPageData(slug: string): Promise<Data | null> {
 
 
 export default async function ProjectPages({ params }: { params: { slug: string } }) {
-  const { slug } = await params; 
+  const { slug } = params; 
 
   if (!slug) {
     console.error("Slug is missing from params");
