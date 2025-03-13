@@ -36,15 +36,9 @@ async function getPageData(slug: string): Promise<Data | null> {
   return await client.fetch(query, { slug });
 }
 
-// ✅ Ensure correct typing for params
-interface PageProps {
-  params: {
-    slug: string;
-  };
-}
-
-export default async function ProjectPages({ params }: PageProps) {
-  const { slug } = await params; // ✅ No need for await here
+// ✅ Ensure `params` is typed correctly
+export default async function ProjectPages({ params }: { params: { slug: string } }) {
+  const { slug } = params; // ✅ No need for `await`
 
   if (!slug) {
     console.error("Slug is missing from params");
