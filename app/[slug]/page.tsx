@@ -57,7 +57,7 @@ console.log("Fetching data for slug:", slug);
 
 export default async function ProjectPages({params}:{params:{slug:string}}){
 
-    const {slug} = await params;
+    const {slug} = params;
 
     if (!slug) {
         console.error("Slug is missing from params");
