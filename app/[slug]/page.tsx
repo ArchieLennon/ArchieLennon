@@ -37,8 +37,8 @@ async function getPageData(slug: string): Promise<Data | null> {
 }
 
 
-export default async function ProjectPages({ params }: { params: { slug: string } }) {
-  const { slug } = params; 
+export default async function ProjectPages({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params; // Await params before destructuring
 
   if (!slug) {
     console.error("Slug is missing from params");
