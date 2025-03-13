@@ -39,81 +39,49 @@ interface data{
 
 export default function Projects({data}:propsType) {
 
-  const [counter,Setcounter] = useState(0)
-  const [shuffledData,setShuffledData] = useState<data[]>([]);
-  const [itemsPerRow,setItemsPerRow] = useState<number>(3)
+  const [counter, Setcounter] = useState(0);
+  const [shuffledData, setShuffledData] = useState<data[]>([]);
+  const [itemsPerRow, setItemsPerRow] = useState<number>(3);
 
-//shuffle data when component mounts
+  useEffect(() => {
+    setShuffledData([...data].sort(() => Math.random() - 0.5));
 
-  useEffect(()=> {
+    // Detect screen size 
+    const handleResize = () => {
+      setItemsPerRow(window.innerWidth <= 768 ? 1 : 3);
+    };
 
-    setShuffledData([...data].sort(() => Math.random() - 0.5))
+    handleResize(); // Set initial state
+    window.addEventListener('resize', handleResize);
 
-  //detect screen size 
+    // Cleanup function
+    return () => window.removeEventListener('resize', handleResize);
+  }, [data]);
 
-  const handleResize = () => {
-    setItemsPerRow(window.innerWidth <= 768 ? 1 : 3)
-  };
-
-  handleResize();//set initial state
-  window.addEventListener('resize',handleResize);
-
-//cleanup to avoid memory leaks
-return () => window.removeEventListener('resize',handleResize);
-},[data]);
-
-
-
-
-
-
-// shuffle data again when button is clicked
+  // Shuffle function
   const handleShuffle = () => {
     setShuffledData([...data].sort(() => Math.random() - 0.5));
-    Setcounter(counter + 1);
+    Setcounter((prev) => prev + 1);
   };
 
-  // split the data dynamically
-
-  const groupedData: data[][]=[]
+  // Grouping data dynamically
+  const groupedData: data[][] = [];
   for (let i = 0; i < shuffledData.length; i += itemsPerRow) {
     groupedData.push(shuffledData.slice(i, i + itemsPerRow));
   }
 
+  return (
+    <div className="snap-always snap-start flex flex-col">
+      {groupedData.map((group, index) => (
+        <DynamicRowB key={index} data={group} />
+      ))}
 
-
-    return (
-        
-        <div className="snap-always snap-start flex flex-col ">
-        
-         {groupedData.map((group,index)=> (
-          <DynamicRowB key={index} data={group} />
-        
-        ))}
-
-        
-        
-
-
-       
-
-
-
-          
-    
-    
-
-       
-
-
-        <div className="w-full text-right  fixed bottom-0 right-0 p-3 ">
-        <h2 className="text-base  justify-end">Version_{counter}</h2>
-        <button 
-        onClick={handleShuffle}
-        className="text-4xl md:text-6xl hover:text-gray-600 ">Archie Lennon</button>
-        
-        </div>
-        
-        </div>
-    )
+      <div className="w-full text-right fixed bottom-0 right-0 p-3">
+        <h2 className="text-base justify-end">Version_{counter}</h2>
+        <button onClick={handleShuffle} className="text-4xl md:text-6xl hover:text-gray-600">
+          Archie Lennon
+        </button>
+      </div>
+    </div>
+  );
 }
