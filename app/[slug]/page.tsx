@@ -36,19 +36,17 @@ async function getPageData(slug: string): Promise<Data | null> {
   return await client.fetch(query, { slug });
 }
 
-// ✅ Ensure `params` is typed correctly
+// ✅ Corrected typing for params
 export default async function ProjectPages({ params }: { params: { slug: string } }) {
-  const { slug } = params; // ✅ No need for `await`
-
-  if (!slug) {
+  if (!params?.slug) {
     console.error("Slug is missing from params");
     return <h1 className="text-red-500">Page Not Found</h1>;
   }
 
-  const data = await getPageData(slug);
+  const data = await getPageData(params.slug);
 
   if (!data) {
-    console.error(`No data found for slug: ${slug}`);
+    console.error(`No data found for slug: ${params.slug}`);
     return <h1 className="text-red-500">Page Not Found</h1>;
   }
 
