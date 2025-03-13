@@ -42,10 +42,10 @@ export default async function Info(){
         
         <div
         key={index} 
-        className="w-full h-screen mt-40 p-3 text-sm snap-always snap-start"
+        className="w-full h-screen  p-3 text-sm  snap-start  "
         >
 
-        <h1 className="w-full text-2xl/tight mb-20">
+        <h1 className="w-full text-2xl/tight mb-10">
            <Link className=" hover:text-gray-600 " href={"mailto:Archielennon11@gmail.com"}> {data.email} </Link> <br/>
            <Link className=" hover:text-gray-600 " href={"https://www.instagram.com/archie_lennon/"}> {data.instagram} </Link> <br/>
            {data.number}
@@ -53,13 +53,13 @@ export default async function Info(){
 
         <div className="w-full  grid grid-rows-2 gap-3 md:grid-cols-2 "> 
             <h1 className="text-2xl  ">About
-                <p className="text-sm pt-10">
+                <p className="text-sm pt-5">
                 {data.about}
                 </p>
             </h1>
-            <h1 className="text-2xl pt-10 md:pt-0">Services
+            <h1 className="text-2xl pt-5 md:pt-0">Services
 
-                <p className="text-sm pt-10"> 
+                <p className="text-sm pt-5"> 
 Branding, <br/>
 Digital Design, <br/>
 Motion Design, <br/>

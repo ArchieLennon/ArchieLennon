@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import MuxPlayer from "@mux/mux-player-react";
+import Link from "next/link";
 
 interface DataType {
     heroimage: string;
@@ -50,7 +51,14 @@ export default function Carousel({ data }: { data: DataType }) {
 
     return (
         <>
-            <div onClick={next} className="flex justify-center items-center h-screen p-3 md:p-6">
+        <div onClick={next} className="flex flex-col h-screen">
+        <Link 
+        href="/" 
+        className="text-black text-sm p-3 md:p-6 text-pretty hover:text-gray-600">
+        Back.
+      </Link>
+
+            <div  className="flex justify-center items-center p-3 md:p-6">
                 
             {videoPlaybackId ? (
                     <MuxPlayer
@@ -65,9 +73,11 @@ export default function Carousel({ data }: { data: DataType }) {
             ):(<div>No video available</div> ) }
             </div>
 
-            <h1 className="text-black text-sm p-3 md:p-6 absolute bottom-0 text-pretty">
+            <h1 className="text-black text-sm p-3 md:p-6 flex  items-end text-pretty mt-auto">
                 {texts[current] && texts[current].length > 0 ? texts[current].join(" ") : "No text available"}
             </h1>
+            
+            </div>
         </>
     );
 }

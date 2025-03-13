@@ -71,7 +71,7 @@ export default function Projects({data}:propsType) {
   }
 
   return (
-    <div className="snap-always snap-start flex flex-col">
+    <div className="snap-always snap-start flex flex-col mb-10">
       {groupedData.map((group, index) => (
         <DynamicRowB key={index} data={group} />
       ))}

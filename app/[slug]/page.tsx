@@ -1,6 +1,7 @@
-import Link from "next/link";
+
 import Carousel from "../components/Carousel";
 import { client } from "../lib/sanity";
+import Link from "next/link";
 
 interface Data {
   heroimage: string;
@@ -54,11 +55,7 @@ export default async function ProjectPages({ params }: { params: Promise<{ slug:
 
   return (
     <div className="w-screen h-screen bg-white selection:text-white selection:bg-black">
-      <Link 
-        href="/" 
-        className="text-black text-sm p-3 md:p-6 absolute top-0 text-pretty hover:text-gray-600">
-        Back.
-      </Link>
+
       <Carousel data={data} />
     </div>
   );
