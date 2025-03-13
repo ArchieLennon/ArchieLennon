@@ -44,7 +44,7 @@ interface PageProps {
 }
 
 export default async function ProjectPages({ params }: PageProps) {
-  const { slug } = params; // ✅ No need for await here
+  const { slug } = await params; // ✅ No need for await here
 
   if (!slug) {
     console.error("Slug is missing from params");
